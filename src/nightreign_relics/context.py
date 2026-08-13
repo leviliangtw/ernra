@@ -49,10 +49,11 @@ GLOSSARY: dict[str, str] = {
         "Most Effects/Curses are usable by every Hero. The rare ones that "
         "aren't carry an `allowed_heroes` field listing exactly which "
         "Heroes can use them (the field is omitted when unrestricted). If "
-        "an owned Relic fails effect_eligible, check its failing effect's "
-        "`allowed_heroes` to see which other Hero it's actually meant for - "
-        "cross-reference `context.all_heroes_kit` below for what that Hero "
-        "does, rather than treating the Relic as simply broken."
+        "an owned Relic has an Effect/Curse whose `allowed_heroes` excludes "
+        "this Hero, check that field to see which other Hero it's actually "
+        "meant for - cross-reference `context.all_heroes_kit` below for "
+        "what that Hero does, rather than treating the Relic as simply "
+        "broken."
     ),
 }
 
@@ -126,8 +127,8 @@ COMMUNITY_NOTES: dict[Hero, CommunityNotes] = {
             "Player-community consensus (Traditional-Chinese PTT C_Chat "
             "board), not official game data. Reflects one point in time and "
             "may be outdated after balance patches. Treat as a starting "
-            "bias, not a hard rule - still respect slot_eligible, "
-            "effect_eligible, and is_illegal from the report before this."
+            "bias, not a hard rule - still respect Hero compatibility (see "
+            "compatibility_axes) and is_illegal from the report before this."
         ),
         core_relics=[
             CoreRelic(
