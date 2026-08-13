@@ -1,7 +1,7 @@
 [project]
 name = "nightreign-relics"
 version = "0.1.0"
-description = "Decrypts an Elden Ring Nightreign save, dumps owned Relics annotated with Hero compatibility, and hands the result to an LLM for Vessel/Relic loadout recommendations."
+description = "Elden Ring Nightreign Relics Analyzer: decrypts a save, dumps owned Relics annotated with Hero compatibility, and hands the result to an LLM for Vessel/Relic loadout recommendations."
 readme = "README.md"
 requires-python = ">=3.12"
 license = "Apache-2.0"

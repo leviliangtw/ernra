@@ -1,6 +1,6 @@
-# nightreign-relics
+# Elden Ring Nightreign Relics Analyzer
 
-A read-only command-line tool for *Elden Ring Nightreign* that decrypts your
+`nightreign-relics` is a read-only command-line tool for *Elden Ring Nightreign* that decrypts your
 save file, dumps your owned Relics for one Hero (annotated with which
 Vessel/Relic slots they're actually eligible for), and hands that to an LLM
 to recommend a Vessel + Relic loadout — so you don't have to manually sort
