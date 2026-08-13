@@ -5,10 +5,10 @@ default no-`--call-llm` flow).
 
 Without this, a "cold" LLM reading the report on its own — e.g. pasted into
 Claude Code or another model — has no way to know what "Delicate/Polished/
-Grand" mean, what the Art Gauge is, or that the two `compatibility` flags
-are independent checks that both must pass. Keeping the wording here as the
-single source means the API path and the paste-it-yourself path never
-drift apart.
+Grand" mean, what the Art Gauge is, or that Hero compatibility is two
+independent checks it must derive itself and both must pass. Keeping the
+wording here as the single source means the API path and the
+paste-it-yourself path never drift apart.
 """
 
 from __future__ import annotations
@@ -40,19 +40,22 @@ GLOSSARY: dict[str, str] = {
         "is_illegal diagnostic flag; don't re-derive it yourself."
     ),
     "compatibility_axes": (
-        "Each owned Relic's `compatibility` block has two independent "
-        "checks: slot_eligible (Color/Normal-Deep matches an available "
-        "Vessel Slot) and effect_eligible (every Effect/Curse is allowed "
-        "for this Hero). Only recommend a Relic where both are true."
+        "A Relic is only usable by this Hero if it clears two independent "
+        "checks - it must fit one of hero_vessels' Slots (matching Color "
+        "and Normal/Deep type; a Slot colored 'White' is a wildcard that "
+        "accepts any Relic Color), and none of its Effects/Curses may be "
+        "locked to a different Hero - and passing one doesn't imply the "
+        "other."
     ),
     "effect_hero_restriction": (
         "Most Effects/Curses are usable by every Hero. The rare ones that "
         "aren't carry an `allowed_heroes` field listing exactly which "
         "Heroes can use them (the field is omitted when unrestricted). If "
-        "an owned Relic fails effect_eligible, check its failing effect's "
-        "`allowed_heroes` to see which other Hero it's actually meant for - "
-        "cross-reference `context.all_heroes_kit` below for what that Hero "
-        "does, rather than treating the Relic as simply broken."
+        "an owned Relic has an Effect/Curse whose `allowed_heroes` excludes "
+        "this Hero, check that field to see which other Hero it's actually "
+        "meant for - cross-reference `context.all_heroes_kit` below for "
+        "what that Hero does, rather than treating the Relic as simply "
+        "broken."
     ),
 }
 
@@ -63,9 +66,9 @@ RECOMMENDATION_GUIDANCE = (
     "hero_kit below) - favor Relics that suit their weapon focus, Skill, "
     "and Ultimate Art rather than discounting a weapon-specific Relic just "
     "because you're unsure what the player is using. Only recommend Relics "
-    "where both slot_eligible and effect_eligible are true, and never "
-    "recommend a Relic flagged is_illegal. Briefly explain your reasoning. "
-    "Respond in the same language as the playstyle description."
+    "that clear both compatibility checks (see compatibility_axes above), "
+    "and never recommend a Relic flagged is_illegal. Briefly explain your "
+    "reasoning. Respond in the same language as the playstyle description."
 )
 
 
@@ -126,8 +129,8 @@ COMMUNITY_NOTES: dict[Hero, CommunityNotes] = {
             "Player-community consensus (Traditional-Chinese PTT C_Chat "
             "board), not official game data. Reflects one point in time and "
             "may be outdated after balance patches. Treat as a starting "
-            "bias, not a hard rule - still respect slot_eligible, "
-            "effect_eligible, and is_illegal from the report before this."
+            "bias, not a hard rule - still respect Hero compatibility (see "
+            "compatibility_axes) and is_illegal from the report before this."
         ),
         core_relics=[
             CoreRelic(

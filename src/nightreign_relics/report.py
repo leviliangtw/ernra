@@ -1,8 +1,10 @@
 """Build and write the JSON report handed to the LLM.
 
 Only owned Relics are included (not the full ~1400-entry game catalog) —
-each carries its own resolved Catalog data, plus two-axis Hero
-compatibility and diagnostic flags. See CONTEXT.md for terminology.
+each carries its own resolved Catalog data plus diagnostic flags. Hero
+compatibility isn't precomputed here (see ADR-0002); the reader derives it
+from the Relic's Color/`is_deep`, `hero_vessels[].slots`, and each
+Effect/Curse's `allowed_heroes`. See CONTEXT.md for terminology.
 
 The report always embeds a `context` block (glossary, target Hero's kit
 reference, a brief kit reference for all 10 Heroes, recommendation
@@ -25,13 +27,13 @@ from . import context as game_context
 from .catalog.loader import Catalog
 from .catalog.models import EMPTY_EFFECT_IDS, HERO_ORDER, Hero, VesselDef
 from .catalog.names import BilingualNames
-from .compatibility import compute_compatibility, hero_vessels
+from .compatibility import hero_vessels
 from .illegal import RelicDiagnostics
 from .save.inventory import OwnedRelic
 
 logger = logging.getLogger(__name__)
 
-SCHEMA_VERSION = 1
+SCHEMA_VERSION = 2
 
 
 @dataclass(frozen=True)
@@ -92,7 +94,6 @@ def build_report(
             )
             continue
 
-        compat = compute_compatibility(relic_def, relic.effects + relic.curses, catalog, hero)
         diag = diagnostics.get(relic.ga_handle)
 
         owned_entries.append(
@@ -109,15 +110,6 @@ def build_report(
                     "is_illegal": diag.is_illegal if diag else False,
                     "illegal_reason": diag.illegal_reason.name if diag and diag.illegal_reason else None,
                     "is_unique": diag.is_unique if diag else False,
-                },
-                "compatibility": {
-                    "slot_eligible": compat.slot_eligible,
-                    "matching_slots": [
-                        {"vessel_id": m.vessel_id, "slot_index": m.slot_index, "slot_kind": m.slot_kind}
-                        for m in compat.matching_slots
-                    ],
-                    "effect_eligible": compat.effect_eligible,
-                    "failing_effect_ids": compat.failing_effect_ids,
                 },
             }
         )
