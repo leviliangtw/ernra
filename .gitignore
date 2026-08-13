@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+
+# uv / venv
+.venv/
+
+# Test / coverage
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# This tool's own generated output (contains personal save data)
+nightreign-report-*.json
+nightreign-recommendation-*.md
+
+# Editor / OS
+.DS_Store
