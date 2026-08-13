@@ -5,10 +5,10 @@ default no-`--call-llm` flow).
 
 Without this, a "cold" LLM reading the report on its own — e.g. pasted into
 Claude Code or another model — has no way to know what "Delicate/Polished/
-Grand" mean, what the Art Gauge is, or that the two `compatibility` flags
-are independent checks that both must pass. Keeping the wording here as the
-single source means the API path and the paste-it-yourself path never
-drift apart.
+Grand" mean, what the Art Gauge is, or that Hero compatibility is two
+independent checks it must derive itself and both must pass. Keeping the
+wording here as the single source means the API path and the
+paste-it-yourself path never drift apart.
 """
 
 from __future__ import annotations
@@ -41,9 +41,11 @@ GLOSSARY: dict[str, str] = {
     ),
     "compatibility_axes": (
         "A Relic is only usable by this Hero if it clears two independent "
-        "checks - it must fit one of hero_vessels' Slots, and none of its "
-        "Effects/Curses may be locked to a different Hero - and passing "
-        "one doesn't imply the other."
+        "checks - it must fit one of hero_vessels' Slots (matching Color "
+        "and Normal/Deep type; a Slot colored 'White' is a wildcard that "
+        "accepts any Relic Color), and none of its Effects/Curses may be "
+        "locked to a different Hero - and passing one doesn't imply the "
+        "other."
     ),
     "effect_hero_restriction": (
         "Most Effects/Curses are usable by every Hero. The rare ones that "
