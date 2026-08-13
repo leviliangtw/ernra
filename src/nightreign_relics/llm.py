@@ -12,12 +12,14 @@ DEFAULT_MODEL = "claude-opus-5"
 _SYSTEM_PROMPT = (
     "You are helping an Elden Ring Nightreign player choose a Relic loadout. "
     "You will be given a JSON report. Its `context` field carries a "
-    "game-term glossary, the target Hero's kit reference (weapon focus, "
-    "Skill, Ultimate Art, role), and recommendation guidance - read and "
-    "follow `context.recommendation_guidance` precisely. The rest of the "
-    "report lists the Hero's available Vessels (each with 6 Relic Slots, a "
-    "fixed Color and Normal/Deep type per Slot) and every Relic the player "
-    "owns, each annotated with Hero compatibility and diagnostic flags."
+    "game-term glossary (including `compatibility_axes`), the target Hero's "
+    "kit reference (weapon focus, Skill, Ultimate Art, role), and "
+    "recommendation guidance - read and follow `context.recommendation_"
+    "guidance` precisely. The rest of the report lists the Hero's available "
+    "Vessels (each with 6 Relic Slots, a fixed Color and Normal/Deep type "
+    "per Slot) and every Relic the player owns, each with diagnostic flags; "
+    "work out Hero compatibility yourself from each Relic's Color/`is_deep` "
+    "against the Vessel Slots and each Effect/Curse's `allowed_heroes`."
 )
 
 

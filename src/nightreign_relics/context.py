@@ -40,10 +40,10 @@ GLOSSARY: dict[str, str] = {
         "is_illegal diagnostic flag; don't re-derive it yourself."
     ),
     "compatibility_axes": (
-        "Each owned Relic's `compatibility` block has two independent "
-        "checks: slot_eligible (Color/Normal-Deep matches an available "
-        "Vessel Slot) and effect_eligible (every Effect/Curse is allowed "
-        "for this Hero). Only recommend a Relic where both are true."
+        "A Relic is only usable by this Hero if it clears two independent "
+        "checks - it must fit one of hero_vessels' Slots, and none of its "
+        "Effects/Curses may be locked to a different Hero - and passing "
+        "one doesn't imply the other."
     ),
     "effect_hero_restriction": (
         "Most Effects/Curses are usable by every Hero. The rare ones that "
@@ -63,9 +63,9 @@ RECOMMENDATION_GUIDANCE = (
     "hero_kit below) - favor Relics that suit their weapon focus, Skill, "
     "and Ultimate Art rather than discounting a weapon-specific Relic just "
     "because you're unsure what the player is using. Only recommend Relics "
-    "where both slot_eligible and effect_eligible are true, and never "
-    "recommend a Relic flagged is_illegal. Briefly explain your reasoning. "
-    "Respond in the same language as the playstyle description."
+    "that clear both compatibility checks (see compatibility_axes above), "
+    "and never recommend a Relic flagged is_illegal. Briefly explain your "
+    "reasoning. Respond in the same language as the playstyle description."
 )
 
 

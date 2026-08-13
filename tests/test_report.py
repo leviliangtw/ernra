@@ -132,9 +132,9 @@ def test_hero_restricted_effect_carries_allowed_heroes_annotation(resources_dir)
     assert effect_entry["allowed_heroes"] == [h.value for h in HERO_ORDER if h in restricted_effect.allowed_heroes]
     assert "Wylder" not in effect_entry["allowed_heroes"]
 
-    # And the compatibility block should actually reflect that restriction.
-    assert relic_entry["compatibility"]["effect_eligible"] is False
-    assert restricted_effect_id in relic_entry["compatibility"]["failing_effect_ids"]
+    # No precomputed compatibility block - the reader derives eligibility
+    # from the raw Color/is_deep/allowed_heroes fields instead (ADR-0002).
+    assert "compatibility" not in relic_entry
 
 
 def test_universal_effect_omits_allowed_heroes_key(resources_dir):

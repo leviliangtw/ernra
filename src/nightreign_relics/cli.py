@@ -48,9 +48,9 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="nightreign-relics",
         description=(
-            "Decrypt an Elden Ring Nightreign save, dump owned Relics annotated "
-            "with Hero compatibility, and hand the result to an LLM for a "
-            "Vessel + Relic loadout recommendation."
+            "Decrypt an Elden Ring Nightreign save, dump owned Relics with "
+            "diagnostic flags, and hand the result to an LLM for a Vessel + "
+            "Relic loadout recommendation."
         ),
     )
     parser.add_argument("--hero", required=True, help="Target Hero, e.g. Wylder (case-insensitive).")
